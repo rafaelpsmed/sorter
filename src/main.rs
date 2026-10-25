@@ -24,10 +24,10 @@ use i18n::{nome_outros, tr, txt};
 use notificacao::Resultado;
 
 const AJUDA_PT: &str = "\
-organizador-pc — monitora uma pasta e move cada arquivo para a pasta da sua categoria
+sorter — monitora uma pasta e move cada arquivo para a pasta da sua categoria
 
 USO:
-    organizador-pc [opções]
+    sorter [opções]
 
 OPÇÕES:
     -c, --config <arquivo>  arquivo de configuração a usar
@@ -36,15 +36,15 @@ OPÇÕES:
     -h, --help              mostra esta ajuda
 
 Sem --config, procura nesta ordem:
-    $XDG_CONFIG_HOME/organizador-pc/config.txt  (normalmente ~/.config/organizador-pc/config.txt)
+    $XDG_CONFIG_HOME/sorter/config.txt  (normalmente ~/.config/sorter/config.txt)
     config.txt na mesma pasta do executável
 ";
 
 const AJUDA_EN: &str = "\
-organizador-pc — watches a folder and moves each file to its category folder
+sorter — watches a folder and moves each file to its category folder
 
 USAGE:
-    organizador-pc [options]
+    sorter [options]
 
 OPTIONS:
     -c, --config <file>     configuration file to use
@@ -53,7 +53,7 @@ OPTIONS:
     -h, --help              show this help
 
 Without --config, it looks in this order:
-    $XDG_CONFIG_HOME/organizador-pc/config.txt  (usually ~/.config/organizador-pc/config.txt)
+    $XDG_CONFIG_HOME/sorter/config.txt  (usually ~/.config/sorter/config.txt)
     config.txt next to the executable
 ";
 
@@ -165,7 +165,7 @@ fn ler_argumentos() -> Result<Option<Opcoes>, String> {
 fn procurar_config() -> Option<PathBuf> {
     let base =
         env::var_os("XDG_CONFIG_HOME").map(PathBuf::from).unwrap_or_else(|| config::pasta_home().join(".config"));
-    let mut candidatos = vec![base.join("organizador-pc").join("config.txt")];
+    let mut candidatos = vec![base.join("sorter").join("config.txt")];
     if let Some(dir) = env::current_exe().ok().and_then(|e| e.parent().map(Path::to_path_buf)) {
         candidatos.push(dir.join("config.txt"));
     }

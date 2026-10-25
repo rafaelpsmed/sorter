@@ -1,4 +1,4 @@
-# Organizador PC
+# Sorter
 
 🇬🇧 English · 🇧🇷 [Português](README.pt-BR.md)
 
@@ -16,7 +16,7 @@ Linux only (it uses inotify and a systemd user service).
 ```
 
 The script builds the program (needs `cargo`), installs the binary into
-`~/.local/bin`, creates `~/.config/organizador-pc/config.txt` from the example
+`~/.local/bin`, creates `~/.config/sorter/config.txt` from the example
 config in your language, shows a dry run and, if you confirm, enables the
 systemd user service, which starts with your session. To start at boot, before
 login: `loginctl enable-linger $USER`.
@@ -29,14 +29,14 @@ Uninstall: `./instalar.sh --uninstall` (the config is kept).
 ./empacotar.sh
 ```
 
-This creates two equivalent options in `dist/`: the `organizador-pc/` folder
-and the `organizador-pc.tar.gz` archive. The package carries the compiled
+This creates two equivalent options in `dist/`: the `sorter/` folder
+and the `sorter.tar.gz` archive. The package carries the compiled
 executable (the other PC does not need Rust) and your current config. On the
 other PC:
 
 ```bash
-tar xzf organizador-pc.tar.gz   # only if you took the .tar.gz
-cd organizador-pc
+tar xzf sorter.tar.gz   # only if you took the .tar.gz
+cd sorter
 ./instalar.sh
 ```
 
@@ -121,10 +121,10 @@ folders that live inside the watched folder, and symbolic links.
 ## Manual use
 
 ```bash
-organizador-pc --dry-run   # show what it would do, move nothing (--simular)
-organizador-pc --once      # organize what is already there and exit (--uma-vez)
-organizador-pc -c other-config.txt
-journalctl --user -u organizador-pc -f   # follow the service
+sorter --dry-run   # show what it would do, move nothing (--simular)
+sorter --once      # organize what is already there and exit (--uma-vez)
+sorter -c other-config.txt
+journalctl --user -u sorter -f   # follow the service
 ```
 
 ## Language

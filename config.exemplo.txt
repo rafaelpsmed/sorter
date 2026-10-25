@@ -1,4 +1,4 @@
-# Configuração do Organizador PC (exemplo em português; veja config.example.txt para o inglês)
+# Configuração do Sorter (exemplo em português; veja config.example.txt para o inglês)
 #
 # Linhas começando com # são comentários. As chaves funcionam em português ou inglês.
 # Use ~ para a pasta pessoal: assim o mesmo arquivo funciona em qualquer PC/usuário.

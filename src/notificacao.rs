@@ -72,7 +72,7 @@ fn resumir(resultados: &[Resultado]) -> Option<(String, String, bool)> {
 
 fn enviar(titulo: &str, corpo: &str, urgente: bool) {
     let resultado = Command::new("notify-send")
-        .args(["--app-name=Organizador PC", "--icon=folder"])
+        .args(["--app-name=Sorter", "--icon=folder"])
         .arg(format!("--urgency={}", if urgente { "critical" } else { "normal" }))
         .arg(titulo)
         .arg(corpo)

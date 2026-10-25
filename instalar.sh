@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Installs Organizador PC for the current user (no sudo needed).
-# Instala o Organizador PC para o usuário atual (não precisa de sudo).
+# Installs Sorter for the current user (no sudo needed).
+# Instala o Sorter para o usuário atual (não precisa de sudo).
 #
 #   ./instalar.sh                  build (if needed), install and start the service
 #   ./instalar.sh --uninstall      stop the service and remove the binary (keeps the config)
@@ -21,34 +21,46 @@ case "${LC_ALL:-${LC_MESSAGES:-${LANG:-}}}" in
 esac
 t() { if [[ $PT == 1 ]]; then printf '%s' "$1"; else printf '%s' "$2"; fi; }
 
-BIN_DESTINO="$HOME/.local/bin/organizador-pc"
-CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/organizador-pc"
+BIN_DESTINO="$HOME/.local/bin/sorter"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sorter"
 UNIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
 
-if [[ "${1:-}" == "--desinstalar" || "${1:-}" == "--uninstall" ]]; then
+# Migration from the old name "organizador-pc" / Migração do nome antigo "organizador-pc".
+OLD_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/organizador-pc"
+if [[ -f "$UNIT_DIR/organizador-pc.service" ]]; then
     systemctl --user disable --now organizador-pc.service 2>/dev/null || true
-    rm -f "$UNIT_DIR/organizador-pc.service" "$BIN_DESTINO"
+    rm -f "$UNIT_DIR/organizador-pc.service" "$HOME/.local/bin/organizador-pc"
+    echo "$(t "Serviço antigo 'organizador-pc' removido." "Old 'organizador-pc' service removed.")"
+fi
+if [[ -d "$OLD_CONFIG_DIR" && ! -e "$CONFIG_DIR" ]]; then
+    mv "$OLD_CONFIG_DIR" "$CONFIG_DIR"
+    echo "$(t "Config migrado de" "Config migrated from") $OLD_CONFIG_DIR $(t "para" "to") $CONFIG_DIR"
+fi
+
+if [[ "${1:-}" == "--desinstalar" || "${1:-}" == "--uninstall" ]]; then
+    systemctl --user disable --now sorter.service 2>/dev/null || true
+    rm -f "$UNIT_DIR/sorter.service" "$BIN_DESTINO"
     systemctl --user daemon-reload
     echo "$(t "Desinstalado. O config foi mantido em" "Uninstalled. The config was kept in") $CONFIG_DIR/config.txt"
     exit 0
 fi
 
 # 1. Binary: use a ready-made one next to the script; otherwise build it.
-if [[ -x ./organizador-pc ]]; then
-    BIN=./organizador-pc
+if [[ -x ./sorter ]]; then
+    BIN=./sorter
 elif command -v cargo >/dev/null; then
     # With the musl target installed (Arch: rust-musl package) the binary is
     # static and runs on any distro; without it, it depends on this PC's glibc.
     if rustc --print sysroot 2>/dev/null | xargs -I{} test -d "{}/lib/rustlib/x86_64-unknown-linux-musl"; then
         cargo build --release --target x86_64-unknown-linux-musl
-        BIN=target/x86_64-unknown-linux-musl/release/organizador-pc
+        BIN=target/x86_64-unknown-linux-musl/release/sorter
     else
         cargo build --release
-        BIN=target/release/organizador-pc
+        BIN=target/release/sorter
     fi
 else
-    t "Erro: não há binário 'organizador-pc' nesta pasta e o cargo (Rust) não está instalado." \
-      "Error: there is no 'organizador-pc' binary in this folder and cargo (Rust) is not installed." >&2
+    t "Erro: não há binário 'sorter' nesta pasta e o cargo (Rust) não está instalado." \
+      "Error: there is no 'sorter' binary in this folder and cargo (Rust) is not installed." >&2
     echo >&2
     exit 1
 fi
@@ -80,14 +92,14 @@ if [[ ! -f "$CONFIG_DIR/config.txt" ]]; then
 fi
 
 # 3. User systemd service: starts with the session.
-install -Dm644 organizador-pc.service "$UNIT_DIR/organizador-pc.service"
+install -Dm644 sorter.service "$UNIT_DIR/sorter.service"
 systemctl --user daemon-reload
-systemctl --user enable organizador-pc.service
-systemctl --user restart organizador-pc.service
+systemctl --user enable sorter.service
+systemctl --user restart sorter.service
 echo
 echo "$(t "Serviço ativo. Comandos úteis:" "Service active. Useful commands:")"
-echo "  journalctl --user -u organizador-pc -f     # $(t "ver o que está sendo movido" "see what is being moved")"
+echo "  journalctl --user -u sorter -f     # $(t "ver o que está sendo movido" "see what is being moved")"
 echo "  ($(t "mudanças no config valem assim que o arquivo é salvo" "config changes apply as soon as the file is saved"))"
-echo "  systemctl --user status organizador-pc"
+echo "  systemctl --user status sorter"
 echo
 echo "$(t "Para iniciar já no boot (antes do login):" "To start at boot (before login):") loginctl enable-linger $USER"

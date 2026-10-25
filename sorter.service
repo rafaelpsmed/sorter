@@ -1,0 +1,10 @@
+[Unit]
+Description=Sorter - moves files into their category folders
+
+[Service]
+ExecStart=%h/.local/bin/sorter
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

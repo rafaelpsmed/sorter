@@ -1,4 +1,4 @@
-# Organizador PC
+# Sorter
 
 🇬🇧 [English](README.md) · 🇧🇷 Português
 
@@ -13,7 +13,7 @@ que já estava lá quando o programa inicia. Funciona offline, só com regras (s
 ```
 
 O script compila (precisa do `cargo`), instala o binário em `~/.local/bin`,
-cria `~/.config/organizador-pc/config.txt` a partir de `config.exemplo.txt`,
+cria `~/.config/sorter/config.txt` a partir de `config.exemplo.txt`,
 mostra uma simulação e, se você confirmar, ativa o serviço do systemd do
 usuário, que inicia junto com a sessão. Para iniciar já no boot, antes do login:
 `loginctl enable-linger $USER`.
@@ -26,13 +26,13 @@ Desinstalar: `./instalar.sh --desinstalar` (o config é mantido).
 ./empacotar.sh
 ```
 
-Gera em `dist/` duas opções com o mesmo conteúdo: a pasta `organizador-pc/` e
-o arquivo `organizador-pc.tar.gz`. O pacote leva o executável já compilado (o
+Gera em `dist/` duas opções com o mesmo conteúdo: a pasta `sorter/` e
+o arquivo `sorter.tar.gz`. O pacote leva o executável já compilado (o
 outro PC não precisa de Rust) e o seu config atual. No outro PC:
 
 ```bash
-tar xzf organizador-pc.tar.gz   # só se levou o .tar.gz
-cd organizador-pc
+tar xzf sorter.tar.gz   # só se levou o .tar.gz
+cd sorter
 ./instalar.sh
 ```
 
@@ -119,10 +119,10 @@ de destino que ficam dentro da pasta monitorada e links simbólicos.
 ## Uso manual
 
 ```bash
-organizador-pc --simular   # mostra o que faria, sem mover nada (--dry-run)
-organizador-pc --uma-vez   # organiza o que já existe e sai (--once)
-organizador-pc -c outro-config.txt
-journalctl --user -u organizador-pc -f   # acompanhar o serviço
+sorter --simular   # mostra o que faria, sem mover nada (--dry-run)
+sorter --uma-vez   # organiza o que já existe e sai (--once)
+sorter -c outro-config.txt
+journalctl --user -u sorter -f   # acompanhar o serviço
 ```
 
 ## Idioma

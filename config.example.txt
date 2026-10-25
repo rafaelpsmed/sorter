@@ -1,4 +1,4 @@
-# Organizador PC configuration (English example; see config.exemplo.txt for Portuguese)
+# Sorter configuration (English example; see config.exemplo.txt for Portuguese)
 #
 # Lines starting with # are comments. Keys work in English or Portuguese.
 # Use ~ for your home folder so the same file works on any PC/user.
