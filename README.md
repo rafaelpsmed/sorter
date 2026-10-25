@@ -12,7 +12,7 @@ Linux only (it uses inotify and a systemd user service).
 ## Installation
 
 ```bash
-./instalar.sh
+./install.sh
 ```
 
 The script builds the program (needs `cargo`), installs the binary into
@@ -21,12 +21,12 @@ config in your language, shows a dry run and, if you confirm, enables the
 systemd user service, which starts with your session. To start at boot, before
 login: `loginctl enable-linger $USER`.
 
-Uninstall: `./instalar.sh --uninstall` (the config is kept).
+Uninstall: `./install.sh --uninstall` (the config is kept).
 
 ### Moving it to another PC
 
 ```bash
-./empacotar.sh
+./package.sh
 ```
 
 This creates two equivalent options in `dist/`: the `sorter/` folder
@@ -37,13 +37,13 @@ other PC:
 ```bash
 tar xzf sorter.tar.gz   # only if you took the .tar.gz
 cd sorter
-./instalar.sh
+./install.sh
 ```
 
 If the other PC already has a config installed, it is kept. The executable
 runs on distros with glibc 2.34 or newer (Ubuntu 22.04+, Debian 12+,
 Fedora 35+). For a fully static executable, install the musl target (on Arch:
-`pacman -S rust-musl`) before running `empacotar.sh`.
+`pacman -S rust-musl`) before running `package.sh`.
 
 Use `~` and `$XDG_..._DIR` in the config, never `/home/your-user`: that way the
 same file works with any user and any system language.
@@ -131,7 +131,7 @@ journalctl --user -u sorter -f   # follow the service
 
 Program messages (terminal and notifications) follow the system language:
 Portuguese if `LC_ALL`, `LC_MESSAGES` or `LANG` starts with `pt`, English
-otherwise. `instalar.sh` and `empacotar.sh` do the same.
+otherwise. `install.sh` and `package.sh` do the same.
 
 ## Development
 

@@ -8,7 +8,7 @@
 # The package carries the compiled executable (the other PC does not need
 # Rust) and your current config (~/.config/sorter/config.txt), if any.
 # O pacote leva o executável já compilado e o seu config atual, se ele existir.
-# On the other PC / No outro PC: tar xzf sorter.tar.gz, cd sorter, ./instalar.sh
+# On the other PC / No outro PC: tar xzf sorter.tar.gz, cd sorter, ./install.sh
 set -euo pipefail
 
 cd "$(dirname "$(readlink -f "$0")")"
@@ -35,7 +35,7 @@ PASTA=dist/sorter
 rm -rf "$PASTA" dist/sorter.tar.gz
 mkdir -p "$PASTA"
 install -m755 "$BIN" "$PASTA/sorter"
-install -m755 instalar.sh "$PASTA/instalar.sh"
+install -m755 install.sh "$PASTA/install.sh"
 install -m644 sorter.service config.example.txt config.exemplo.txt README.md README.pt-BR.md LICENSE "$PASTA/"
 
 CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/sorter/config.txt"

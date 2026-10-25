@@ -2,13 +2,13 @@
 # Installs Sorter for the current user (no sudo needed).
 # Instala o Sorter para o usuário atual (não precisa de sudo).
 #
-#   ./instalar.sh                  build (if needed), install and start the service
-#   ./instalar.sh --uninstall      stop the service and remove the binary (keeps the config)
+#   ./install.sh                  build (if needed), install and start the service
+#   ./install.sh --uninstall      stop the service and remove the binary (keeps the config)
 #   (aliases / equivalentes: --desinstalar)
 #
-# To move it to another PC, build the package with ./empacotar.sh, copy the
+# To move it to another PC, build the package with ./package.sh, copy the
 # folder (or the .tar.gz) from dist/ and run this script there.
-# Para levar para outro PC, gere o pacote com ./empacotar.sh, copie a pasta
+# Para levar para outro PC, gere o pacote com ./package.sh, copie a pasta
 # (ou o .tar.gz) de dist/ e rode este script lá.
 set -euo pipefail
 
@@ -86,7 +86,7 @@ if [[ ! -f "$CONFIG_DIR/config.txt" ]]; then
     echo
     read -rp "$(t "Iniciar o serviço agora? [s/N] " "Start the service now? [y/N] ")" resp
     [[ "$resp" =~ ^[sSyY] ]] || {
-        echo "$(t "Edite o config e rode ./instalar.sh de novo." "Edit the config and run ./instalar.sh again.")"
+        echo "$(t "Edite o config e rode ./install.sh de novo." "Edit the config and run ./install.sh again.")"
         exit 0
     }
 fi

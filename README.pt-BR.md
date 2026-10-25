@@ -9,7 +9,7 @@ que já estava lá quando o programa inicia. Funciona offline, só com regras (s
 ## Instalação
 
 ```bash
-./instalar.sh
+./install.sh
 ```
 
 O script compila (precisa do `cargo`), instala o binário em `~/.local/bin`,
@@ -18,12 +18,12 @@ mostra uma simulação e, se você confirmar, ativa o serviço do systemd do
 usuário, que inicia junto com a sessão. Para iniciar já no boot, antes do login:
 `loginctl enable-linger $USER`.
 
-Desinstalar: `./instalar.sh --desinstalar` (o config é mantido).
+Desinstalar: `./install.sh --desinstalar` (o config é mantido).
 
 ### Levar para outro PC
 
 ```bash
-./empacotar.sh
+./package.sh
 ```
 
 Gera em `dist/` duas opções com o mesmo conteúdo: a pasta `sorter/` e
@@ -33,13 +33,13 @@ outro PC não precisa de Rust) e o seu config atual. No outro PC:
 ```bash
 tar xzf sorter.tar.gz   # só se levou o .tar.gz
 cd sorter
-./instalar.sh
+./install.sh
 ```
 
 Se o outro PC já tiver um config instalado, ele é mantido. O executável roda
 em distros com glibc 2.34 ou mais nova (Ubuntu 22.04+, Debian 12+, Fedora 35+).
 Para um executável totalmente estático, instale o alvo musl (no Arch:
-`pacman -S rust-musl`) antes de rodar o `empacotar.sh`.
+`pacman -S rust-musl`) antes de rodar o `package.sh`.
 
 Use `~` e `$XDG_..._DIR` no config, nunca `/home/seu-usuario`: assim o mesmo
 arquivo funciona com qualquer usuário e em qualquer idioma do sistema.
@@ -129,7 +129,7 @@ journalctl --user -u sorter -f   # acompanhar o serviço
 
 As mensagens do programa (terminal e notificações) seguem o idioma do sistema:
 português se `LC_ALL`, `LC_MESSAGES` ou `LANG` começar com `pt`, inglês nos
-demais casos. Os scripts `instalar.sh` e `empacotar.sh` fazem o mesmo.
+demais casos. Os scripts `install.sh` e `package.sh` fazem o mesmo.
 
 ## Desenvolvimento
 
