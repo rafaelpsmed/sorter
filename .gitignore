@@ -1,0 +1,6 @@
+target/
+dist/
+
+# personal notes, not part of the project
+EXPLICACAO.md
+spec.txt

@@ -1,0 +1,39 @@
+# Organizador PC configuration (English example; see config.exemplo.txt for Portuguese)
+#
+# Lines starting with # are comments. Keys work in English or Portuguese.
+# Use ~ for your home folder so the same file works on any PC/user.
+# For the standard folders, whose names change with the system language
+# (Videos/Vídeos, Music/Músicas...), use $XDG_VIDEOS_DIR, $XDG_MUSIC_DIR,
+# $XDG_PICTURES_DIR, $XDG_DOCUMENTS_DIR, $XDG_DOWNLOAD_DIR — the program finds
+# the right name on each PC.
+#
+# SOURCE_DIR       watched folder
+# OTHERS_DIR       where files without a category go (default: SOURCE_DIR/OTHERS)
+# WAIT_SECONDS     how long a file must stay unchanged before being moved (default: 5)
+# NOTIFICATIONS    show a desktop notification when items are moved (default: yes)
+#
+# Each category:   N. NAME: destination_folder | ext: a, b, c | words: x, y, z
+#   - ext only:       every file with these extensions goes there
+#   - words only:     every file whose name contains one of the words goes there
+#   - ext + words:    needs both, and takes priority over the other kinds
+# Words ignore case and accents. Words of up to 3 letters (e.g. tc) must appear
+# as a separate word in the name; longer ones may appear inside another word.
+#
+# Subfolders are moved whole, never taken apart: each file inside is classified
+# (the folder name also counts as a word) and the folder goes to the category
+# of more than half of its files. With no majority, it goes to OTHERS_DIR.
+
+SOURCE_DIR: $XDG_DOWNLOAD_DIR
+OTHERS_DIR: $XDG_DOWNLOAD_DIR/OTHERS
+WAIT_SECONDS: 5
+NOTIFICATIONS: yes
+
+CATEGORIES:
+1. VIDEOS: $XDG_VIDEOS_DIR | ext: mp4, mkv, avi, mov, webm, wmv, flv, m4v, mpg, mpeg, 3gp
+2. MUSIC: $XDG_MUSIC_DIR | ext: mp3, flac, wav, ogg, m4a, aac, opus, wma
+3. PICTURES: $XDG_PICTURES_DIR | ext: jpg, jpeg, png, gif, webp, bmp, svg, heic, tiff, tif
+4. INVOICES: $XDG_DOCUMENTS_DIR/Invoices | ext: pdf | words: invoice, receipt, nota fiscal
+5. BOOKS: ~/Books | ext: pdf, epub, mobi, azw3, djvu
+6. DOCUMENTS: $XDG_DOCUMENTS_DIR | ext: doc, docx, odt, rtf, txt, md, xls, xlsx, ods, csv, ppt, pptx, odp
+7. ARCHIVES: $XDG_DOWNLOAD_DIR/Archives | ext: zip, rar, 7z, tar, gz, tar.gz, tgz, bz2, xz, tar.xz, zst
+8. PROGRAMS: $XDG_DOWNLOAD_DIR/Programs | ext: appimage, deb, rpm, flatpakref, run, sh, exe, msi, iso

@@ -1,0 +1,20 @@
+[package]
+name = "organizador-pc"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Watches a folder and moves each file to its category folder / Monitora uma pasta e move cada arquivo para a pasta da sua categoria"
+license = "MIT"
+readme = "README.md"
+keywords = ["organizer", "downloads", "file-manager", "watcher", "linux"]
+categories = ["command-line-utilities", "filesystem"]
+
+[dependencies]
+infer = { version = "0.19", default-features = false, features = ["std"] }
+notify = "8"
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
+codegen-units = 1

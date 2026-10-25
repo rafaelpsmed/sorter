@@ -1,0 +1,38 @@
+# Configuração do Organizador PC (exemplo em português; veja config.example.txt para o inglês)
+#
+# Linhas começando com # são comentários. As chaves funcionam em português ou inglês.
+# Use ~ para a pasta pessoal: assim o mesmo arquivo funciona em qualquer PC/usuário.
+# Para as pastas padrão, que mudam de nome conforme o idioma (Vídeos/Videos,
+# Músicas/Music...), use $XDG_VIDEOS_DIR, $XDG_MUSIC_DIR, $XDG_PICTURES_DIR,
+# $XDG_DOCUMENTS_DIR, $XDG_DOWNLOAD_DIR — o programa descobre o nome certo em cada PC.
+#
+# PASTA_FONTE            pasta monitorada
+# PASTA_OUTROS           para onde vão os arquivos sem categoria (padrão: PASTA_FONTE/OUTROS)
+# ESPERA_SEGUNDOS        quanto tempo o arquivo precisa ficar sem mudar antes de ser movido (padrão: 5)
+# NOTIFICACOES           mostra uma notificação na área de trabalho ao mover itens (padrão: sim)
+#
+# Cada categoria:   N. NOME: pasta_destino | ext: a, b, c | palavras: x, y, z
+#   - só ext:            vai para lá todo arquivo com essas extensões
+#   - só palavras:       vai para lá todo arquivo cujo nome tem a palavra
+#   - ext + palavras:    precisa das duas coisas, e tem prioridade sobre as outras
+# As palavras ignoram maiúsculas e acentos. Palavras de até 3 letras (ex.: tc)
+# precisam aparecer isoladas no nome; maiores podem aparecer dentro de outra.
+#
+# Subpastas são movidas inteiras, nunca desmontadas: cada arquivo dentro dela é
+# classificado (o nome da pasta também conta como palavra) e a pasta vai para a
+# categoria de mais da metade dos arquivos. Sem maioria, vai para PASTA_OUTROS.
+
+PASTA_FONTE: $XDG_DOWNLOAD_DIR
+PASTA_OUTROS: $XDG_DOWNLOAD_DIR/OUTROS
+ESPERA_SEGUNDOS: 5
+NOTIFICACOES: sim
+
+CATEGORIAS:
+1. VIDEOS: $XDG_VIDEOS_DIR | ext: mp4, mkv, avi, mov, webm, wmv, flv, m4v, mpg, mpeg, 3gp
+2. MUSICAS: $XDG_MUSIC_DIR | ext: mp3, flac, wav, ogg, m4a, aac, opus, wma
+3. IMAGENS: $XDG_PICTURES_DIR | ext: jpg, jpeg, png, gif, webp, bmp, svg, heic, tiff, tif
+4. NOTAS_FISCAIS: $XDG_DOCUMENTS_DIR/Notas fiscais | ext: pdf | palavras: nota fiscal, nfe, recibo, boleto
+5. LIVROS: ~/Livros | ext: pdf, epub, mobi, azw3, djvu
+6. DOCUMENTOS: $XDG_DOCUMENTS_DIR | ext: doc, docx, odt, rtf, txt, md, xls, xlsx, ods, csv, ppt, pptx, odp
+7. COMPACTADOS: $XDG_DOWNLOAD_DIR/Compactados | ext: zip, rar, 7z, tar, gz, tar.gz, tgz, bz2, xz, tar.xz, zst
+8. PROGRAMAS: $XDG_DOWNLOAD_DIR/Programas | ext: appimage, deb, rpm, flatpakref, run, sh, exe, msi, iso
